@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ordinary-differential-equations"
+version = "0.1.0"
+description = "Projects related to solving ODE using numerical techniques"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "jupyterlab>=4.6.3",
+    "matplotlib>=3.11.1",
+    "numpy>=2.5.3",
+]
+
+[tool.setuptools.packages.find]
+include = ["solver"]
+
+[tool.uv]
+link-mode = "copy"
