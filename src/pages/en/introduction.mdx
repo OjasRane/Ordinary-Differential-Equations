@@ -1,0 +1,58 @@
+---
+layout: '@/layouts/Markdown.astro'
+title: Introduction
+description: Quick introduction to the project.
+---
+
+**Ordinary Differential Equations** is a from-scratch collection of fixed-step numerical methods for solving ODEs, accompanied by mathematical walkthroughs, experiments, and animated applications.
+
+The project was built primarily to explore the mathematics behind numerical ODE solving rather than treating numerical solvers as black boxes. The methods are implemented directly using NumPy and then applied to problems ranging from population models and the error function to pendulums and spring–mass systems.
+
+## Numerical Methods
+
+The project currently implements methods for both **initial value problems (IVPs)** and **boundary value problems (BVPs)**.
+
+For IVPs:
+
+- Euler's method
+- Explicit midpoint method
+- Heun's / improved Euler method
+- Classical fourth-order Runge–Kutta method (RK4)
+
+Both first-order and second-order ODEs are supported by the IVP solvers.
+
+For linear second-order BVPs, the project uses **central finite differences** to transform the differential equation into a tridiagonal linear system, which is then solved using the **Thomas algorithm**.
+
+## Notebooks
+
+The notebooks develop the numerical methods mathematically and then investigate them through numerical experiments.
+
+They currently cover:
+
+- Derivation and comparison of Euler, midpoint, Heun, and RK4 methods
+- Finite-difference solution of boundary value problems
+- Population models, including logistic growth and the Allee effect
+- Computing the error function by formulating it as an initial value problem
+
+[Explore the notebooks →](./notebooks)
+
+## Animations
+
+The numerical solutions are also used to animate several dynamical systems and mathematical models, including:
+
+- Simple pendulum motion
+- Undamped and damped spring–mass systems
+- Population growth with the Allee effect
+- The error function
+
+These animations are generated from numerical solutions computed using the methods implemented in the project.
+
+[View the animations →](./animations)
+
+## Scope
+
+This is an **educational implementation**, not a replacement for production numerical libraries.
+
+The solvers deliberately remain relatively simple: they use fixed step sizes and scalar states, without adaptive error control, stiffness handling, event detection, or the extensive numerical safeguards provided by mature scientific-computing libraries.
+
+For production work, tools such as `scipy.integrate.solve_ivp` and `scipy.integrate.solve_bvp` are more appropriate.

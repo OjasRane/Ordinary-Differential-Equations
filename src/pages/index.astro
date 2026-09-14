@@ -1,0 +1,22 @@
+---
+import { DEFAULT_LANGUAGE_CODE } from '@/config'
+import LandingPage from '@/components/LandingPage.astro'
+import { LANDING_PAGE } from '@/i18n/ui'
+---
+
+<LandingPage t={LANDING_PAGE[DEFAULT_LANGUAGE_CODE]} />
+
+<p class="mt-10 text-sm opacity-60 text-center">
+  This project website was built with
+  <a href="https://astro.build/" target="_blank" rel="noopener noreferrer">
+    Astro
+  </a>
+  and adapted from the
+  <a
+    href="https://github.com/ekmas/stellar"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Stellar theme
+  </a>.
+</p>

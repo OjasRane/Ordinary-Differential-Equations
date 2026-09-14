@@ -1,0 +1,53 @@
+---
+import NotebookCard from './NotebookCard.astro'
+
+import { withBase } from '@/utils/paths'
+
+const notebooks = [
+  {
+    title: 'Solving Initial Value Problems',
+    description:
+      "Derive and compare Euler's method, midpoint, Heun's method, and classical RK4 for first- and second-order IVPs.",
+    href: withBase('/notebooks/solving_ivp_problems.html'),
+  },
+  {
+    title: 'Solving Boundary Value Problems',
+    description:
+      'Use finite differences to solve linear second-order BVPs and solve the resulting system with the Thomas algorithm.',
+    href: withBase('/notebooks/solving_ivp_problems.html'),
+  },
+  {
+    title: 'Population Models',
+    description:
+      'Explore exponential growth, logistic growth, carrying capacity, and the Allee effect using numerical ODE models.',
+    href: withBase('/notebooks/solving_ivp_problems.html'),
+  },
+  {
+    title: 'The Error Function using an ODE',
+    description:
+      'Reformulate the error function as an initial value problem and compute it numerically using RK4.',
+    href: withBase('/notebooks/solving_ivp_problems.html'),
+  },
+]
+---
+
+<div class="grid">
+  {notebooks.map((notebook) => (
+    <NotebookCard {...notebook} />
+  ))}
+</div>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 700px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

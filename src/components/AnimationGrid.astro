@@ -1,0 +1,60 @@
+---
+import AnimationCard from './AnimationCard.astro'
+
+import { withBase } from '@/utils/paths'
+
+const animations = [
+  {
+    title: 'Simple Pendulum',
+    description:
+      'Numerical simulation of a simple pendulum using the implemented ODE solver.',
+    src: withBase('/animations/simple_pendulum.gif'),
+  },
+  {
+    title: 'Spring–Mass System',
+    description:
+      'Oscillatory motion of an undamped spring–mass system obtained from its governing differential equation.',
+    src: withBase('/animations/spring_mass.gif'),
+  },
+  {
+    title: 'Damped Spring–Mass System',
+    description:
+      'A spring–mass system with damping, showing the gradual decay of oscillations over time.',
+    src: withBase('/animations/damped_shm.mp4'),
+    type: 'video' as const,
+  },
+  {
+    title: 'Population Model with the Allee Effect',
+    description:
+      'Population evolution under the Allee-effect model, including the influence of a threshold population.',
+    src: withBase('/animations/population_modelling.gif'),
+  },
+  {
+    title: 'Error Function',
+    description:
+      'Construction of the error function from numerical solutions of its corresponding initial value problem.',
+    src: withBase('/animations/erf.gif'),
+  },
+]
+---
+
+<div class="animation-grid">
+  {animations.map((animation) => (
+    <AnimationCard {...animation} />
+  ))}
+</div>
+
+<style>
+  .animation-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 700px) {
+    .animation-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
