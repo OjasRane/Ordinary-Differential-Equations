@@ -1,7 +1,7 @@
 import numpy as np
 
 def euler_method(a, b, h, **kwargs):
-    """Euler's method: Solves second order ODE using Euler's method.
+    """Euler's method: Solves first or second order ODE using Euler's method.
     :param a: start point. The start of region of observation.
     :param b: end point. The end of region of observation.
     :param h: step size.
@@ -68,7 +68,7 @@ def midpoint_method(a, b, h, **kwargs):
     return x, y
 
 def heun_method(a, b, h, **kwargs):
-    """Heun method: Solves first order ODE using Heun's method.
+    """Heun method: Solves first or second order ODE using Heun's method.
     :param a: start point. The start of region of observation.
     :param b: end point. The end of region of observation.
     :param h: step size.
@@ -106,7 +106,7 @@ def heun_method(a, b, h, **kwargs):
     return x, y
 
 def rk4(a, b, h, **kwargs):
-    """RK4 method: Solves first order ODE using Runge-Kutta method of order 4.
+    """RK4 method: Solves first or second order ODE using Runge-Kutta method of order 4.
     :param a: start point. The start of region of observation.
     :param b: end point. The end of region of observation.
     :param h: step size.
