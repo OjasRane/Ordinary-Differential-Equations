@@ -129,7 +129,7 @@ $$
 \frac{dy}{dx}=\frac{2}{\sqrt{\pi}}e^{-x^2}, \qquad y(0)=0.
 $$
 
-RK4 calculates the nonnegative half of the curve. The animation simultaneously draws the negative half using the odd symmetry $\operatorname{erf}(-x)=-\operatorname{erf}(x)$. The numerical data is subsampled before rendering to keep the animation concise.
+RK4 calculates the nonnegative half of the curve. The animation simultaneously draws the negative half using the odd symmetry $\mathrm{erf}(-x)=-\mathrm{erf}(x)$. The numerical data is subsampled before rendering to keep the animation concise.
 
 See [`erf_function_using_ode.ipynb`](../analysis/erf_function_using_ode.ipynb) for the accompanying derivation.
 

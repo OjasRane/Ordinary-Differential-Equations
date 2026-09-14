@@ -160,7 +160,7 @@ A rendered animation based on the same model is available as [`population_modell
 [`erf_function_using_ode.ipynb`](erf_function_using_ode.ipynb) starts from
 
 $$
-\operatorname{erf}(x)=\int_0^x \frac{2}{\sqrt{\pi}}e^{-t^2}\,dt
+\mathrm{erf}(x)=\int_0^x \frac{2}{\sqrt{\pi}}e^{-t^2}\,dt
 $$
 
 and rewrites it as the IVP
@@ -169,7 +169,7 @@ $$
 y'=\frac{2}{\sqrt{\pi}}e^{-x^2}, \qquad y(0)=0.
 $$
 
-RK4 computes the solution for nonnegative $x$. The notebook then uses the odd symmetry $\operatorname{erf}(-x)=-\operatorname{erf}(x)$ to plot the function over $[-32,32]$.
+RK4 computes the solution for nonnegative $x$. The notebook then uses the odd symmetry $\mathrm{erf}(-x)=-\mathrm{erf}(x)$ to plot the function over $[-32,32]$.
 
 A rendered version of this visualization is available as [`erf.gif`](../animation_scripts/animations/erf.gif).
 
