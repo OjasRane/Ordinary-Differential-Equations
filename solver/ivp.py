@@ -150,3 +150,80 @@ def rk4(a, b, h, **kwargs):
             k4 = func(x[i+1], y[i]+h*k3)
             y[i+1] = y[i] + h*(k1 + 2*k2 + 2*k3 + k4)/6
     return x, y
+
+def state_euler_method(a, b, h, func, initial_state):
+    r"""
+    Euler's method using states: This implementation can solve ODE by giving the state vector at any point. This makes it suitable for solving any order ODE and coupled systems.
+    :param a: start point. The start of region of observation.
+    :param b: end point. The end of region of observation.
+    :param h: step size.
+    :param func: If $\vec{r}(t)=<...>$ then func should accept $(t, \vec{r}(t))$ and return $\frac{d\vec{r}}{dt}$
+    :param initial_state: np.ndarray of 1 dimension which has $\vec{r_0}$
+    """
+    N = int((b-a)/h)
+    x = a + h * np.arange(N+1, dtype=np.float64)
+    solution = np.empty((int(initial_state.size), N+1), dtype=np.float64)
+    solution[:, 0] = initial_state
+    for i in range(N):
+        solution[:, i+1] = solution[:, i] + (h * func(x[i], solution[:, i]))
+    return x, solution
+
+def state_midpoint_method(a, b, h, func, initial_state):
+    r"""
+    Midpoint method using states: This implementation can solve ODE by giving the state vector at any point. This makes it suitable for solving any order ODE and coupled systems.
+    :param a: start point. The start of region of observation.
+    :param b: end point. The end of region of observation.
+    :param h: step size.
+    :param func: If $\vec{r}(t)=<...>$ then func should accept $(t, \vec{r}(t))$ and return $\frac{d\vec{r}}{dt}$
+    :param initial_state: np.ndarray of 1 dimension which has $\vec{r_0}$
+    """
+    N = int((b-a)/h)
+    x = a + h * np.arange(N+1, dtype=np.float64)
+    solution = np.empty((int(initial_state.size), N+1), dtype=np.float64)
+    solution[:, 0] = initial_state
+    for i in range(N):
+        midpoint = solution[:, i] + (h/2) * func(x[i], solution[:, i])
+        solution[:, i+1] = solution[:, i] + (h * func(x[i]+h/2, midpoint))
+    return x, solution
+
+def state_heun_method(a, b, h, func, initial_state):
+    r"""
+    Heun's method using states: This implementation can solve ODE by giving the state vector at any point. This makes it suitable for solving any order ODE and coupled systems.
+    :param a: start point. The start of region of observation.
+    :param b: end point. The end of region of observation.
+    :param h: step size.
+    :param func: If $\vec{r}(t)=<...>$ then func should accept $(t, \vec{r}(t))$ and return $\frac{d\vec{r}}{dt}$
+    :param initial_state: np.ndarray of 1 dimension which has $\vec{r_0}$
+    """
+    N = int((b-a)/h)
+    x = a + h * np.arange(N+1, dtype=np.float64)
+    solution = np.empty((int(initial_state.size), N+1), dtype=np.float64)
+    solution[:, 0] = initial_state
+    for i in range(N):
+        slope1 = func(x[i], solution[:, i])
+        slope2 = func(x[i+1], solution[:, i] + (h * slope1))
+        slope = (slope1 + slope2) / 2
+        solution[:, i+1] = solution[:, i] + h * slope
+    return x, solution
+
+def state_rk4(a, b, h, func, initial_state):
+    r"""
+    RK4 method using states: This implementation can solve ODE by giving the state vector at any point. This makes it suitable for solving any order ODE and coupled systems.
+    :param a: start point. The start of region of observation.
+    :param b: end point. The end of region of observation.
+    :param h: step size.
+    :param func: If $\vec{r}(t)=<...>$ then func should accept $(t, \vec{r}(t))$ and return $\frac{d\vec{r}}{dt}$
+    :param initial_state: np.ndarray of 1 dimension which has $\vec{r_0}$
+    """
+    N = int((b-a)/h)
+    x = a + h * np.arange(N+1, dtype=np.float64)
+    solution = np.empty((int(initial_state.size), N+1), dtype=np.float64)
+    solution[:, 0] = initial_state
+    for i in range(N):
+        k1 = func(x[i], solution[:, i])
+        k2 = func(x[i] + h/2, solution[:, i] + (h/2)*k1)
+        k3 = func(x[i] + h/2, solution[:, i] + (h/2)*k2)
+        k4 = func(x[i+1], solution[:, i] + (h*k3))
+        slope = (k1 + 2*k2 + 2*k3 + k4)/6
+        solution[:, i+1] = solution[:, i] + h * slope
+    return x, solution
