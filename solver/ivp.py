@@ -22,11 +22,12 @@ def euler_method(a, b, h, **kwargs):
         initial_slope = kwargs.get("initial_slope", None)
         dy = np.zeros_like(x, dtype=np.float64)
         dy[0] = initial_slope
-    for i in range(N):
-        if second_order:
+    if second_order:
+        for i in range(N):
             dy[i+1] = dy[i] + h * (q(x[i], y[i]) - p(x[i], y[i]) * dy[i])
             y[i+1] = y[i] + h * dy[i+1]
-        else:
+    else:
+        for i in range(N):
             y[i+1] = y[i] + h * func(x[i], y[i])
     return x, y
 
@@ -52,8 +53,8 @@ def midpoint_method(a, b, h, **kwargs):
         initial_slope = kwargs.get("initial_slope", None)
         dy = np.zeros_like(x, dtype=np.float64)
         dy[0] = initial_slope
-    for i in range(N):
-        if second_order:
+    if second_order:
+        for i in range(N):
             slope1 = q(x[i], y[i]) - p(x[i], y[i]) * dy[i]
             x_mid = x[i] + h / 2
             dy_mid = dy[i] + (h/2) * slope1
@@ -61,7 +62,8 @@ def midpoint_method(a, b, h, **kwargs):
             slope = q(x_mid, y_mid) - p(x_mid, y_mid) * dy_mid
             dy[i+1] = dy[i] + h * slope
             y[i+1] = y[i] + h * dy_mid
-        else:
+    else:
+        for i in range(N):
             slope1 = func(x[i], y[i])
             slope = func(x[i]+h/2, y[i] + (h/2)*slope1)
             y[i+1] = y[i] + h * slope
@@ -89,8 +91,8 @@ def heun_method(a, b, h, **kwargs):
         initial_slope = kwargs.get("initial_slope", None)
         dy = np.zeros_like(x, dtype=np.float64)
         dy[0] = initial_slope
-    for i in range(N):
-        if second_order:
+    if second_order:
+        for i in range(N):
             slope1 = q(x[i], y[i]) - p(x[i], y[i]) * dy[i]
             dy_ = dy[i] + h * slope1
             y_ = y[i] + h * dy[i]
@@ -98,7 +100,8 @@ def heun_method(a, b, h, **kwargs):
             slope = (slope1 + slope2) / 2
             dy[i+1] = dy[i] + h * slope
             y[i+1] = y[i] + h * (dy[i] + dy_) / 2
-        else:
+    else:
+        for i in range(N):
             slope1 = func(x[i], y[i])
             slope2 = func(x[i+1], y[i] + h * slope1)
             slope = (slope1 + slope2) / 2
@@ -127,8 +130,8 @@ def rk4(a, b, h, **kwargs):
         initial_slope = kwargs.get("initial_slope", None)
         dy = np.zeros_like(x, dtype=np.float64)
         dy[0] = initial_slope
-    for i in range(N):
-        if second_order:
+    if second_order:
+        for i in range(N):
             k1 = q(x[i], y[i]) - p(x[i], y[i]) * dy[i]
             x_ = x[i] + h / 2
             dy2 = dy[i] + (h/2)*k1
@@ -143,7 +146,8 @@ def rk4(a, b, h, **kwargs):
             k4 = q(x_, y_) - p(x_, y_) * dy4
             dy[i+1] = dy[i] + h*(k1 + 2*k2 + 2*k3 + k4)/6
             y[i+1] = y[i] + h*(dy[i] + 2*dy2 + 2*dy3 + dy4)/6
-        else:
+    else:
+        for i in range(N):
             k1 = func(x[i], y[i])
             k2 = func(x[i]+h/2, y[i] + (h/2)*k1)
             k3 = func(x[i]+h/2, y[i] + (h/2)*k2)
