@@ -6,14 +6,14 @@ This directory contains the mathematical explanations and worked examples for th
 
 | Notebook | Main topics | Solver used |
 | --- | --- | --- |
-| [`solving_ivp_problems.ipynb`](solving_ivp_problems.ipynb) | Euler, midpoint, Heun, RK4, and first- and second-order IVPs | `solver.ivp` |
+| [`solving_ivp_problems.ipynb`](solving_ivp_problems.ipynb) | Scalar and state-vector IVPs, coupled systems, higher-order reduction, and the Lorenz attractor | `solver.ivp` |
 | [`solving_bvp_problems_using_fdm.ipynb`](solving_bvp_problems_using_fdm.ipynb) | Central finite differences and the Thomas tridiagonal algorithm | `solver.bvp` |
 | [`population_models.ipynb`](population_models.ipynb) | Exponential growth, logistic growth, carrying capacity, and the Allee effect | `solver.ivp.rk4` |
 | [`erf_function_using_ode.ipynb`](erf_function_using_ode.ipynb) | Computing the error function as an initial value problem | `solver.ivp.rk4` |
 
 ## Recommended learning path
 
-1. Start with [`solving_ivp_problems.ipynb`](solving_ivp_problems.ipynb) to understand the fixed-step integration methods.
+1. Start with [`solving_ivp_problems.ipynb`](solving_ivp_problems.ipynb) to understand the fixed-step methods, then continue through its state-vector and coupled-system sections.
 2. Continue with [`solving_bvp_problems_using_fdm.ipynb`](solving_bvp_problems_using_fdm.ipynb) to see how a differential equation becomes a tridiagonal linear system.
 3. Explore [`population_models.ipynb`](population_models.ipynb) for a real-world nonlinear modelling application.
 4. Finish with [`erf_function_using_ode.ipynb`](erf_function_using_ode.ipynb) for an example involving a special function without an elementary antiderivative.
@@ -82,7 +82,7 @@ Python 3.12 or newer is required.
 
 ### Solving IVPs
 
-[`solving_ivp_problems.ipynb`](solving_ivp_problems.ipynb) introduces ordinary differential equations and explains why numerical solutions are needed when a convenient analytical solution is unavailable. It derives four fixed-step methods for equations of the form
+[`solving_ivp_problems.ipynb`](solving_ivp_problems.ipynb) introduces ordinary differential equations and explains why numerical solutions are needed when a convenient analytical solution is unavailable. It first derives four fixed-step methods for scalar equations of the form
 
 $$
 y'=f(x,y), \qquad y(a)=y_0.
@@ -110,6 +110,58 @@ y''-3y'=x-2y, \qquad y(0)=0, \quad y'(0)=0.
 $$
 
 Each plot reports the mean absolute difference between the numerical and analytical values.
+
+#### State vectors and coupled systems
+
+The notebook then generalizes the four methods to state-vector equations:
+
+$$
+\frac{d\vec{r}}{dt}=\vec{f}(t,\vec{r}), \qquad \vec{r}(a)=\vec{r}_0.
+$$
+
+Representing all dependent variables in one vector allows the same update rule to solve coupled systems. It also handles higher-order ODEs after introducing derivative states. For example,
+
+$$
+y''=f(t,y,y')
+$$
+
+can be rewritten with $\vec{r}=\langle y,v\rangle$ and $v=y'$ as
+
+$$
+\frac{d\vec{r}}{dt}=\langle v,f(t,y,v)\rangle.
+$$
+
+The first state-vector example solves the coupled system
+
+$$
+x'=\frac{y}{8}, \qquad y'=\frac{x}{2}, \qquad x(0)=1, \quad y(0)=0,
+$$
+
+using `state_euler_method`, `state_midpoint_method`, `state_heun_method`, and `state_rk4`. Every result is compared against
+
+$$
+x(t)=\cosh\left(\frac{t}{4}\right), \qquad y(t)=2\sinh\left(\frac{t}{4}\right).
+$$
+
+The next example combines two second-order oscillators into the four-component state $\langle x,x',y,y'\rangle$:
+
+$$
+x''+x=0, \qquad y''+4y=0.
+$$
+
+It demonstrates that the same state-vector interface can solve multiple higher-order equations simultaneously and contrasts explicit Euler's long-term energy drift with the higher-order methods.
+
+#### Lorenz attractor
+
+The final IVP example applies `state_rk4` to the three-variable Lorenz system
+
+$$
+\dot{x}=10(y-x), \qquad
+\dot{y}=x(28-z)-y, \qquad
+\dot{z}=xy-\frac{8}{3}z.
+$$
+
+Trajectories starting at $\langle0,1,0\rangle$ and $\langle0.1,1,0\rangle$ illustrate sensitivity to initial conditions. Related rendered demonstrations are available as [`lorenz_attractor.mp4`](../animation_scripts/animations/lorenz_attractor.mp4) and [`double_pendulum.mp4`](../animation_scripts/animations/double_pendulum.mp4).
 
 ### Solving BVPs with finite differences
 

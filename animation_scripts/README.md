@@ -1,6 +1,6 @@
 # Animation scripts
 
-This directory turns numerical solutions from the project's [`solver.ivp`](../solver/README.md#initial-value-problems) module into interactive Matplotlib animations. Each script defines an ODE model, solves it with the from-scratch RK4 implementation, and maps the computed values onto moving plot elements with `matplotlib.animation.FuncAnimation`. The GIFs and MP4s in animations/ are pre-rendered. Scripts default to a live Matplotlib display rather than saving on every run, since saving costs more time and memory than most demo use needs — see [Exporting media](#exporting-media) if you want to save a modified animation.
+This directory turns numerical solutions from the project's [`solver.ivp`](../solver/README.md) module into interactive Matplotlib animations. Each script defines an ODE model, solves it with either the scalar `rk4` or state-vector `state_rk4` implementation, and maps the computed values onto moving plot elements with `matplotlib.animation.FuncAnimation`. The GIFs and MP4s in `animations/` are pre-rendered. Scripts default to a live Matplotlib display rather than saving on every run, since saving costs more time and memory than most demo use needs—see [Exporting media](#exporting-media) to save a modified animation.
 
 ## Gallery
 
@@ -25,9 +25,34 @@ This directory turns numerical solutions from the project's [`solver.ivp`](../so
       <img src="animations/erf.gif" alt="Error function animation" width="360">
     </td>
   </tr>
+  <tr>
+    <td align="center">
+      <strong>Damped spring–mass system</strong><br>
+      <video src="animations/damped_shm.mp4" controls loop muted width="360">
+        <a href="animations/damped_shm.mp4">Watch the damped spring–mass animation</a>
+      </video><br>
+      <a href="animations/damped_shm.mp4">Open MP4</a>
+    </td>
+    <td align="center">
+      <strong>Double pendulum</strong><br>
+      <video src="animations/double_pendulum.mp4" controls loop muted width="360">
+        <a href="animations/double_pendulum.mp4">Watch the double-pendulum animation</a>
+      </video><br>
+      <a href="animations/double_pendulum.mp4">Open MP4</a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <strong>Lorenz attractor</strong><br>
+      <video src="animations/lorenz_attractor.mp4" controls loop muted width="720">
+        <a href="animations/lorenz_attractor.mp4">Watch the Lorenz-attractor animation</a>
+      </video><br>
+      <a href="animations/lorenz_attractor.mp4">Open MP4</a>
+    </td>
+  </tr>
 </table>
 
-The damped spring–mass demo is provided as an [MP4 video](animations/damped_shm.mp4).
+The direct links below each video provide access on Markdown renderers that do not display embedded MP4 players.
 
 ## Available demonstrations
 
@@ -38,6 +63,8 @@ The damped spring–mass demo is provided as an [MP4 video](animations/damped_sh
 | [`damped_shm.py`](damped_shm.py) | Damped harmonic oscillator with a position trace | [`damped_shm.mp4`](animations/damped_shm.mp4) |
 | [`population_modelling.py`](population_modelling.py) | Population growth with the Allee effect | [`population_modelling.gif`](animations/population_modelling.gif) |
 | [`erf.py`](erf.py) | Error function generated from its defining IVP | [`erf.gif`](animations/erf.gif) |
+| [`double_pendulum.py`](double_pendulum.py) | Two double pendulums with nearly identical initial states | [`double_pendulum.mp4`](animations/double_pendulum.mp4) |
+| [`lorenz_attractor.py`](lorenz_attractor.py) | Three-dimensional Lorenz system | [`lorenz_attractor.mp4`](animations/lorenz_attractor.mp4) |
 
 ## Running an animation
 
@@ -66,7 +93,7 @@ Every demonstration follows the same pipeline:
 ```text
 ODE and initial conditions
           ↓
-   solver.ivp.rk4
+solver.ivp.rk4 or state_rk4
           ↓
 NumPy arrays of time and state
           ↓
@@ -133,12 +160,37 @@ RK4 calculates the nonnegative half of the curve. The animation simultaneously d
 
 See [`erf_function_using_ode.ipynb`](../analysis/erf_function_using_ode.ipynb) for the accompanying derivation.
 
+### Double pendulum
+
+[`double_pendulum.py`](double_pendulum.py) represents each nonlinear pendulum with the four-component state
+
+$$
+\vec{r}=\langle\theta_1,\omega_1,\theta_2,\omega_2\rangle
+$$
+
+and evolves it with `state_rk4`. The defaults are $L_1=5$, $L_2=2$, $m_1=10$, $m_2=2$, and $g=9.81$. Two systems are simulated together: one starts with $\theta_1=\pi/2$, while the other starts at $\theta_1=\pi/2-0.01$. Their remaining initial state is identical. The animation highlights how this small initial difference produces visibly different trajectories in a chaotic system.
+
+### Lorenz attractor
+
+[`lorenz_attractor.py`](lorenz_attractor.py) solves the Lorenz system
+
+$$
+\frac{dx}{dt}=\sigma(y-x), \qquad
+\frac{dy}{dt}=x(\rho-z)-y, \qquad
+\frac{dz}{dt}=xy-\beta z
+$$
+
+with `state_rk4`, using $\sigma=10$, $\rho=28$, $\beta=8/3$, and initial state $\langle0,1,0\rangle$. The animation draws the trajectory in three dimensions, tracks its current point, and rotates the camera after the numerical path has been completed.
+
+The state-vector formulation and a comparison of nearby Lorenz trajectories are explained in [`solving_ivp_problems.ipynb`](../analysis/solving_ivp_problems.ipynb).
+
 ## Customizing a demo
 
 The model parameters are constants near the beginning of each script. Common adjustments include:
 
-- Physical parameters such as `g`, `L`, `m`, `k`, or `c`
+- Physical parameters such as `g`, `L`, `L1`, `L2`, `m`, `m1`, `m2`, `k`, or `c`
 - Population parameters `r`, `K`, `T`, and `initial`
+- Lorenz parameters `sigma`, `rho`, `beta`, and `initial_state`
 - Integration interval `a` to `b` and solver step size `h`
 - `frames` and `interval` in `FuncAnimation`
 - Plot limits, titles, colors, marker sizes, and figure dimensions
@@ -147,7 +199,7 @@ Keep requested frame indices within the length of the arrays returned by RK4. Sm
 
 ## Exporting media
 
-The checked-in GIF and MP4 files live in [`animations/`](animations/). The scripts currently display their animations without saving them. To export a modified animation, insert an `anim.save(...)` call before `plt.show()`.
+The checked-in GIF and MP4 files live in [`animations/`](animations/). The scripts currently display their animations without saving them. To export a modified animation, call `.save(...)` on its animation object before `plt.show()`. Most scripts name that object `anim`; the double-pendulum and Lorenz scripts use `ani`.
 
 For GIF output:
 
