@@ -11,6 +11,13 @@ const animations = [
     src: withBase('/animations/simple_pendulum.gif'),
   },
   {
+  title: 'Double Pendulum',
+  description:
+    'Two double pendulums starting with an initial angular difference of 0.01, demonstrating sensitive dependence on initial conditions.',
+  src: withBase('/animations/double_pendulum.mp4'),
+  type: 'video' as const,
+  },
+  {
     title: 'Spring–Mass System',
     description:
       'Oscillatory motion of an undamped spring–mass system obtained from its governing differential equation.',
@@ -22,6 +29,13 @@ const animations = [
       'A spring–mass system with damping, showing the gradual decay of oscillations over time.',
     src: withBase('/animations/damped_shm.mp4'),
     type: 'video' as const,
+  },
+  {
+  title: 'Lorenz Attractor',
+  description:
+    'Simulation of the Lorenz system, illustrating chaotic dynamics and the emergence of its characteristic strange attractor.',
+  src: withBase('/animations/lorenz_attractor.mp4'),
+  type: 'video' as const,
   },
   {
     title: 'Population Model with the Allee Effect',
