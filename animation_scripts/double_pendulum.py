@@ -11,7 +11,7 @@ m2 = 2
 
 def func(t, state):
     theta1, w1, theta2, w2 = state[0], state[1], state[2], state[3]
-    denominator = m1 + m2 - m2*np.cos(2*theta1 - 2*theta2)
+    denominator = 2*m1 + m2 - m2*np.cos(2*theta1 - 2*theta2)
     return np.array([
         w1,
         (-g*(2*m1+m2)*np.sin(theta1) - m2*g*np.sin(theta1-2*theta2) - 2*np.sin(theta1-theta2)*m2*((w2**2)*L2+(w1**2)*L1*np.cos(theta1-theta2)))/(L1*denominator),
