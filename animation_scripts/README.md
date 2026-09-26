@@ -32,7 +32,7 @@ This directory turns numerical solutions from the project's [`solver.ivp`](../so
     </td>
     <td align="center">
       <strong>Double pendulum</strong><br>
-      <a href="https://github.com/user-attachments/assets/ad94bcb8-6147-4528-b685-798417f8e5bc">Watch the double-pendulum animation</a>
+      <a href="https://github.com/user-attachments/assets/e3828ccc-f8d4-4178-8b3e-86f478523abf">Watch the double-pendulum animation</a>
     </td>
   </tr>
   <tr>
