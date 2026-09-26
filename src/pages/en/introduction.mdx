@@ -6,7 +6,7 @@ description: Quick introduction to the project.
 
 **Ordinary Differential Equations** is a from-scratch collection of fixed-step numerical methods for solving ODEs, accompanied by mathematical walkthroughs, experiments, and animated applications.
 
-The project was built primarily to explore the mathematics behind numerical ODE solving rather than treating numerical solvers as black boxes. The methods are implemented directly using NumPy and then applied to problems ranging from population models and the error function to pendulums and spring–mass systems.
+The project was built primarily to explore the mathematics behind numerical ODE solving rather than treating numerical solvers as black boxes. The methods are implemented directly using NumPy and then applied to problems ranging from population models and the error function to oscillatory systems, double pendulums, and the Lorenz system.
 
 ## Numerical Methods
 
@@ -34,7 +34,7 @@ They currently cover:
 - Population models, including logistic growth and the Allee effect
 - Computing the error function by formulating it as an initial value problem
 
-[Explore the notebooks →](../notebooks)
+[Explore the notebooks →](../notebooks/)
 
 ## Animations
 
@@ -54,6 +54,6 @@ These animations are generated from numerical solutions computed using the metho
 
 This is an **educational implementation**, not a replacement for production numerical libraries.
 
-The solvers deliberately remain relatively simple: they use fixed step sizes and scalar states, without adaptive error control, stiffness handling, event detection, or the extensive numerical safeguards provided by mature scientific-computing libraries.
+The solvers deliberately remain relatively simple: they use fixed step sizes and do not include adaptive error control, stiffness handling, event detection, or the extensive numerical safeguards provided by mature scientific-computing libraries.
 
 For production work, tools such as `scipy.integrate.solve_ivp` and `scipy.integrate.solve_bvp` are more appropriate.
