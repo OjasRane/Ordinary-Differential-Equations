@@ -19,7 +19,7 @@ For IVPs:
 - Heun's / improved Euler method
 - Classical fourth-order Runge–Kutta method (RK4)
 
-Both first-order and second-order ODEs are supported by the IVP solvers.
+The IVP solvers support first-order equations, second-order equations, and systems of ODEs using a state-vector formulation.
 
 For linear second-order BVPs, the project uses **central finite differences** to transform the differential equation into a tridiagonal linear system, which is then solved using the **Thomas algorithm**.
 
@@ -40,14 +40,15 @@ They currently cover:
 
 The numerical solutions are also used to animate several dynamical systems and mathematical models, including:
 
-- Simple pendulum motion
+- Simple and double pendulum motion
 - Undamped and damped spring–mass systems
+- The Lorenz system and its chaotic attractor
 - Population growth with the Allee effect
 - The error function
 
 These animations are generated from numerical solutions computed using the methods implemented in the project.
 
-[View the animations →](../animations)
+[View the animations →](../animations/)
 
 ## Scope
 
