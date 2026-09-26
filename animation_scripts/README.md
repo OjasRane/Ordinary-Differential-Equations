@@ -28,26 +28,17 @@ This directory turns numerical solutions from the project's [`solver.ivp`](../so
   <tr>
     <td align="center">
       <strong>Damped spring–mass system</strong><br>
-      <video src="animations/damped_shm.mp4" controls loop muted width="360">
-        <a href="animations/damped_shm.mp4">Watch the damped spring–mass animation</a>
-      </video><br>
-      <a href="animations/damped_shm.mp4">Open MP4</a>
+      <a href="https://github.com/user-attachments/assets/f43c315b-6fb7-4008-82ab-dff599e1c48f">Watch the damped spring–mass animation</a>
     </td>
     <td align="center">
       <strong>Double pendulum</strong><br>
-      <video src="animations/double_pendulum.mp4" controls loop muted width="360">
-        <a href="animations/double_pendulum.mp4">Watch the double-pendulum animation</a>
-      </video><br>
-      <a href="animations/double_pendulum.mp4">Open MP4</a>
+      <a href="https://github.com/user-attachments/assets/ad94bcb8-6147-4528-b685-798417f8e5bc">Watch the double-pendulum animation</a>
     </td>
   </tr>
   <tr>
     <td align="center" colspan="2">
       <strong>Lorenz attractor</strong><br>
-      <video src="animations/lorenz_attractor.mp4" controls loop muted width="720">
-        <a href="animations/lorenz_attractor.mp4">Watch the Lorenz-attractor animation</a>
-      </video><br>
-      <a href="animations/lorenz_attractor.mp4">Open MP4</a>
+      <a href="https://github.com/user-attachments/assets/b3f5ef3b-e850-42d4-a14c-ffcaf710aa20">Watch the Lorenz-attractor animation</a>
     </td>
   </tr>
 </table>
