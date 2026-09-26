@@ -4,13 +4,9 @@ A small, from-scratch collection of fixed-step numerical solvers for ordinary di
 
 > This is an educational implementation built with NumPy. It is useful for studying numerical methods and experimenting with ODE models; for production scientific computing, prefer a mature solver such as `scipy.integrate.solve_ivp` or `scipy.integrate.solve_bvp`.
 
+https://github.com/user-attachments/assets/77b3ca64-fb23-4500-be51-931f0a997506
 <p align="center">
-  <video src="animation_scripts/animations/double_pendulum.mp4" controls autoplay loop muted width="640">
     Numerical simulation of two double pendulums with nearly identical initial conditions.
-  </video>
-</p>
-<p align="center">
-  <a href="animation_scripts/animations/double_pendulum.mp4">Watch the double-pendulum simulation</a>
 </p>
 
 ## Features
