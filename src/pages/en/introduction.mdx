@@ -6,7 +6,7 @@ description: Quick introduction to the project.
 
 **Ordinary Differential Equations** is a from-scratch collection of fixed-step numerical methods for solving ODEs, accompanied by mathematical walkthroughs, experiments, and animated applications.
 
-The project was built primarily to explore the mathematics behind numerical ODE solving rather than treating numerical solvers as black boxes. The methods are implemented directly using NumPy and then applied to problems ranging from population models and the error function to oscillatory systems, double pendulums, and the Lorenz system.
+The project was built primarily to explore the mathematics behind numerical ODE solving rather than treating numerical solvers as black boxes. The methods are implemented directly using NumPy and explored both geometrically and numerically, before being applied to problems ranging from population models and the error function to oscillatory systems, double pendulums, and the Lorenz system.
 
 ## Numerical Methods
 
@@ -29,7 +29,9 @@ The notebooks develop the numerical methods mathematically and then investigate 
 
 They currently cover:
 
+- Geometric intuition for initial value problems using direction/vector fields and solution curves
 - Derivation and comparison of Euler, midpoint, Heun, and RK4 methods
+- Solving higher-order equations and systems of ODEs using state vectors
 - Finite-difference solution of boundary value problems
 - Population models, including logistic growth and the Allee effect
 - Computing the error function by formulating it as an initial value problem
@@ -42,7 +44,7 @@ The numerical solutions are also used to animate several dynamical systems and m
 
 - Simple and double pendulum motion
 - Undamped and damped spring–mass systems
-- The Lorenz system and its chaotic attractor
+- The Lorenz system, including its chaotic attractor and the divergence of nearby trajectories
 - Population growth with the Allee effect
 - The error function
 
