@@ -6,14 +6,14 @@ This directory contains the mathematical explanations and worked examples for th
 
 | Notebook | Main topics | Solver used |
 | --- | --- | --- |
-| [`solving_ivp_problems.ipynb`](solving_ivp_problems.ipynb) | Scalar and state-vector IVPs, coupled systems, higher-order reduction, and the Lorenz attractor | `solver.ivp` |
+| [`solving_ivp_problems.ipynb`](solving_ivp_problems.ipynb) | Vector fields; scalar and state-vector IVPs; coupled systems; higher-order reduction; and Lorenz-system sensitivity | `solver.ivp` |
 | [`solving_bvp_problems_using_fdm.ipynb`](solving_bvp_problems_using_fdm.ipynb) | Central finite differences and the Thomas tridiagonal algorithm | `solver.bvp` |
 | [`population_models.ipynb`](population_models.ipynb) | Exponential growth, logistic growth, carrying capacity, and the Allee effect | `solver.ivp.rk4` |
 | [`erf_function_using_ode.ipynb`](erf_function_using_ode.ipynb) | Computing the error function as an initial value problem | `solver.ivp.rk4` |
 
 ## Recommended learning path
 
-1. Start with [`solving_ivp_problems.ipynb`](solving_ivp_problems.ipynb) to understand the fixed-step methods, then continue through its state-vector and coupled-system sections.
+1. Start with [`solving_ivp_problems.ipynb`](solving_ivp_problems.ipynb) to connect differential equations with vector fields, understand the fixed-step methods, and then continue through its state-vector and coupled-system sections.
 2. Continue with [`solving_bvp_problems_using_fdm.ipynb`](solving_bvp_problems_using_fdm.ipynb) to see how a differential equation becomes a tridiagonal linear system.
 3. Explore [`population_models.ipynb`](population_models.ipynb) for a real-world nonlinear modelling application.
 4. Finish with [`erf_function_using_ode.ipynb`](erf_function_using_ode.ipynb) for an example involving a special function without an elementary antiderivative.
@@ -88,6 +88,8 @@ $$
 y'=f(x,y), \qquad y(a)=y_0.
 $$
 
+Before deriving the numerical methods, the notebook introduces vector fields (slope fields). For an equation $\frac{dy}{dx}=f(x,y)$, the value of $f(x,y)$ gives the slope of a short line segment at each point in the plane. A plotted field for $\frac{dy}{dx}=2x$ shows how an IVP solution can be viewed as a curve that follows these local directions. This provides the geometric motivation for advancing a numerical solution one step at a time.
+
 The methods are presented in increasing order of accuracy:
 
 | Method | Expected global error |
@@ -161,7 +163,7 @@ $$
 \dot{z}=xy-\frac{8}{3}z.
 $$
 
-Trajectories starting at $\langle0,1,0\rangle$ and $\langle0.1,1,0\rangle$ illustrate sensitivity to initial conditions. Related rendered demonstrations are available as [`lorenz_attractor.mp4`](../animation_scripts/animations/lorenz_attractor.mp4) and [`double_pendulum.mp4`](../animation_scripts/animations/double_pendulum.mp4).
+Trajectories starting at $\langle0,1,0\rangle$ and $\langle0.1,1,0\rangle$ illustrate sensitivity to initial conditions. Related rendered demonstrations are available as [`lorenz_attractor.mp4`](../animation_scripts/animations/lorenz_attractor.mp4) and [`two_lorenz_trajectories.mp4`](../animation_scripts/animations/two_lorenz_trajectories.mp4). The paired animation makes the initially close paths and their eventual divergence visible in the same three-dimensional view.
 
 ### Solving BVPs with finite differences
 

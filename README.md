@@ -17,7 +17,7 @@ https://github.com/user-attachments/assets/e3828ccc-f8d4-4178-8b3e-86f478523abf
 - Euler, midpoint, Heun, and classical fourth-order Runge–Kutta (RK4) methods
 - Linear second-order BVPs solved with finite differences and the Thomas tridiagonal algorithm
 - Explanatory Jupyter notebooks that derive the methods, introduce state vectors, and compare numerical results with analytical solutions
-- Matplotlib animations for pendulums, spring–mass systems, population growth, the error function, and the Lorenz attractor
+- Matplotlib animations for pendulums, spring–mass systems, population growth, the error function, and single or paired Lorenz trajectories
 
 ## Numerical methods
 
@@ -210,7 +210,7 @@ Scalar IVP and BVP solvers return `(x, y)`. State-vector IVP solvers return `(t,
 
 | Notebook | Contents |
 | --- | --- |
-| [`solving_ivp_problems.ipynb`](analysis/solving_ivp_problems.ipynb) | Euler, midpoint, Heun, and RK4 derivations; scalar and state-vector IVPs; coupled systems; Lorenz attractor |
+| [`solving_ivp_problems.ipynb`](analysis/solving_ivp_problems.ipynb) | Vector fields; Euler, midpoint, Heun, and RK4 derivations; scalar and state-vector IVPs; coupled systems; Lorenz attractor and sensitivity to initial conditions |
 | [`solving_bvp_problems_using_fdm.ipynb`](analysis/solving_bvp_problems_using_fdm.ipynb) | Finite-difference derivation, tridiagonal system construction, and comparison with an analytical solution |
 | [`population_models.ipynb`](analysis/population_models.ipynb) | Exponential growth, logistic growth, carrying capacity, and the Allee effect |
 | [`erf_function_using_ode.ipynb`](analysis/erf_function_using_ode.ipynb) | Computing and plotting the error function as an IVP |
@@ -228,6 +228,7 @@ The repository includes interactive scripts and pre-rendered media:
 | Error function | [`erf.py`](animation_scripts/erf.py) | [`erf.gif`](animation_scripts/animations/erf.gif) |
 | Double pendulum | [`double_pendulum.py`](animation_scripts/double_pendulum.py) | [`double_pendulum.mp4`](animation_scripts/animations/double_pendulum.mp4) |
 | Lorenz attractor | [`lorenz_attractor.py`](animation_scripts/lorenz_attractor.py) | [`lorenz_attractor.mp4`](animation_scripts/animations/lorenz_attractor.mp4) |
+| Nearby Lorenz trajectories | [`two_lorenz_trajectories.py`](animation_scripts/two_lorenz_trajectories.py) | [`two_lorenz_trajectories.mp4`](animation_scripts/animations/two_lorenz_trajectories.mp4) |
 
 Open an interactive Matplotlib window for any demo from the repository root, for example:
 
@@ -261,7 +262,8 @@ The current scripts display animations with `plt.show()`; the rendered GIF and M
 │   ├── lorenz_attractor.py
 │   ├── population_modelling.py
 │   ├── simple_pendulum.py
-│   └── spring_mass.py
+│   ├── spring_mass.py
+│   └── two_lorenz_trajectories.py
 ├── pyproject.toml                     # Package metadata and direct dependencies
 ├── requirements.txt                   # pip-compatible dependency list
 ├── uv.lock                            # Fully resolved dependency lockfile

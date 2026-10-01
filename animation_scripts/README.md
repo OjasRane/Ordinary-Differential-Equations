@@ -36,14 +36,18 @@ This directory turns numerical solutions from the project's [`solver.ivp`](../so
     </td>
   </tr>
   <tr>
-    <td align="center" colspan="2">
+    <td align="center">
       <strong>Lorenz attractor</strong><br>
       <a href="https://github.com/user-attachments/assets/b3f5ef3b-e850-42d4-a14c-ffcaf710aa20">Watch the Lorenz-attractor animation</a>
+    </td>
+    <td align="center">
+      <strong>Two Lorenz trajectories</strong><br>
+      <a href="https://github.com/user-attachments/assets/9ca35a00-3e58-4b64-adbf-3a05f9c08c49">Watch the two-trajectory Lorenz animation</a>
     </td>
   </tr>
 </table>
 
-The direct links below each video provide access on Markdown renderers that do not display embedded MP4 players.
+The MP4 animations use direct links so they remain accessible on Markdown renderers that do not display embedded video players.
 
 ## Available demonstrations
 
@@ -56,6 +60,7 @@ The direct links below each video provide access on Markdown renderers that do n
 | [`erf.py`](erf.py) | Error function generated from its defining IVP | [`erf.gif`](animations/erf.gif) |
 | [`double_pendulum.py`](double_pendulum.py) | Two double pendulums with nearly identical initial states | [`double_pendulum.mp4`](animations/double_pendulum.mp4) |
 | [`lorenz_attractor.py`](lorenz_attractor.py) | Three-dimensional Lorenz system | [`lorenz_attractor.mp4`](animations/lorenz_attractor.mp4) |
+| [`two_lorenz_trajectories.py`](two_lorenz_trajectories.py) | Two Lorenz trajectories with nearby initial states | [`two_lorenz_trajectories.mp4`](animations/two_lorenz_trajectories.mp4) |
 
 ## Running an animation
 
@@ -174,6 +179,10 @@ $$
 with `state_rk4`, using $\sigma=10$, $\rho=28$, $\beta=8/3$, and initial state $\langle0,1,0\rangle$. The animation draws the trajectory in three dimensions, tracks its current point, and rotates the camera after the numerical path has been completed.
 
 The state-vector formulation and a comparison of nearby Lorenz trajectories are explained in [`solving_ivp_problems.ipynb`](../analysis/solving_ivp_problems.ipynb).
+
+### Two Lorenz trajectories
+
+[`two_lorenz_trajectories.py`](two_lorenz_trajectories.py) solves the same Lorenz system twice, starting from the nearby states $\langle0,1,0\rangle$ and $\langle0.1,1,0\rangle$. Both trajectories use identical parameters and numerical settings. Plotting them together demonstrates sensitive dependence on initial conditions: although the paths initially remain close, they eventually diverge while continuing to evolve on the same attractor.
 
 ## Customizing a demo
 

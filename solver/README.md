@@ -178,7 +178,7 @@ x = solution[0]
 y = solution[1]
 ```
 
-The same interface powers the project's nonlinear [`double_pendulum.py`](../animation_scripts/double_pendulum.py) and [`lorenz_attractor.py`](../animation_scripts/lorenz_attractor.py) demonstrations.
+The same interface powers the project's nonlinear [`double_pendulum.py`](../animation_scripts/double_pendulum.py), [`lorenz_attractor.py`](../animation_scripts/lorenz_attractor.py), and [`two_lorenz_trajectories.py`](../animation_scripts/two_lorenz_trajectories.py) demonstrations. The paired Lorenz script integrates two nearby initial states independently with `state_rk4` to visualize sensitive dependence on initial conditions.
 
 The state-vector derivation, coupled examples, higher-order reduction, and Lorenz system are in [`solving_ivp_problems.ipynb`](../analysis/solving_ivp_problems.ipynb).
 
