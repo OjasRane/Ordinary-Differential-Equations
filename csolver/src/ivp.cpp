@@ -32,7 +32,7 @@ csolver::IVPSolution<double> csolver::heun_method(const double a, const double b
     solution.row(0) = initial;
     for (std::uint64_t i = 0; i < N; ++i) {
         jacobi::Vector<double> slope1 = func(time[i], solution.row(i));
-        jacobi::Vector<double> slope2 = func(time[i] + (h / 2.0), solution.row(i) + h * slope1);
+        jacobi::Vector<double> slope2 = func(time[i+1], solution.row(i) + h * slope1);
         jacobi::Vector<double> slope = (slope1 + slope2) / 2.0;
         solution.row(i+1) = solution.row(i) + h * slope;
     }
