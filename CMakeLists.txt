@@ -5,3 +5,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_subdirectory(csolver)
 add_subdirectory(animation_scripts/csolved)
+add_subdirectory(benchmark/csolver)
