@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.20)
+project(Ordinary-Differential-Equations VERSION 0.5.0 LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_subdirectory(csolver)
+add_subdirectory(animation_scripts/csolved)
+add_subdirectory(benchmark/csolver)

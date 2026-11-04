@@ -1,251 +1,58 @@
 # Analysis notebooks
 
-This directory contains the mathematical explanations and worked examples for the numerical methods implemented in the project's [`solver`](../solver/) package. The notebooks combine derivations, executable Python, analytical reference solutions, and Matplotlib visualizations.
+The notebooks in this directory explain the project's numerical methods and apply them to example problems. They combine mathematical derivations, executable Python, analytical comparisons, and plots using the [Python solver package](../solver/README.md).
 
 ## Notebook guide
 
-| Notebook | Main topics | Solver used |
-| --- | --- | --- |
-| [`solving_ivp_problems.ipynb`](solving_ivp_problems.ipynb) | Vector fields; scalar and state-vector IVPs; coupled systems; higher-order reduction; and Lorenz-system sensitivity | `solver.ivp` |
-| [`solving_bvp_problems_using_fdm.ipynb`](solving_bvp_problems_using_fdm.ipynb) | Central finite differences and the Thomas tridiagonal algorithm | `solver.bvp` |
-| [`population_models.ipynb`](population_models.ipynb) | Exponential growth, logistic growth, carrying capacity, and the Allee effect | `solver.ivp.rk4` |
-| [`erf_function_using_ode.ipynb`](erf_function_using_ode.ipynb) | Computing the error function as an initial value problem | `solver.ivp.rk4` |
-
-## Recommended learning path
-
-1. Start with [`solving_ivp_problems.ipynb`](solving_ivp_problems.ipynb) to connect differential equations with vector fields, understand the fixed-step methods, and then continue through its state-vector and coupled-system sections.
-2. Continue with [`solving_bvp_problems_using_fdm.ipynb`](solving_bvp_problems_using_fdm.ipynb) to see how a differential equation becomes a tridiagonal linear system.
-3. Explore [`population_models.ipynb`](population_models.ipynb) for a real-world nonlinear modelling application.
-4. Finish with [`erf_function_using_ode.ipynb`](erf_function_using_ode.ipynb) for an example involving a special function without an elementary antiderivative.
-
-The application notebooks can also be read independently after becoming familiar with basic first-order IVPs.
-
-## Running the notebooks
-
-Install the project and its dependencies by following the root [installation guide](../README.md#installation). To open JupyterLab directly in this directory, use one of the following workflows.
-
-### Using `uv` (recommended)
-
-#### Linux and macOS
-
-```bash
-git clone https://github.com/OjasRane/Ordinary-Differential-Equations.git
-cd Ordinary-Differential-Equations
-uv sync --locked
-uv run jupyter lab analysis
-```
-
-#### Windows (PowerShell)
-
-```powershell
-git clone https://github.com/OjasRane/Ordinary-Differential-Equations.git
-Set-Location Ordinary-Differential-Equations
-uv sync --locked
-uv run jupyter lab analysis
-```
-
-Open a notebook in JupyterLab and run its cells from top to bottom. The project is installed into the environment by `uv sync`, allowing notebook cells to import the local solver modules:
-
-```python
-from solver import bvp, ivp
-```
-
-### Using `pip`
-
-#### Linux and macOS
-
-```bash
-git clone https://github.com/OjasRane/Ordinary-Differential-Equations.git
-cd Ordinary-Differential-Equations
-python3.12 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -e .
-python -m jupyter lab analysis
-```
-
-#### Windows (PowerShell)
-
-```powershell
-git clone https://github.com/OjasRane/Ordinary-Differential-Equations.git
-Set-Location Ordinary-Differential-Equations
-py -3.12 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install -e .
-python -m jupyter lab analysis
-```
-
-Python 3.12 or newer is required.
-
-## Notebook details
-
-### Solving IVPs
-
-[`solving_ivp_problems.ipynb`](solving_ivp_problems.ipynb) introduces ordinary differential equations and explains why numerical solutions are needed when a convenient analytical solution is unavailable. It first derives four fixed-step methods for scalar equations of the form
-
-$$
-y'=f(x,y), \qquad y(a)=y_0.
-$$
-
-Before deriving the numerical methods, the notebook introduces vector fields (slope fields). For an equation $\frac{dy}{dx}=f(x,y)$, the value of $f(x,y)$ gives the slope of a short line segment at each point in the plane. A plotted field for $\frac{dy}{dx}=2x$ shows how an IVP solution can be viewed as a curve that follows these local directions. This provides the geometric motivation for advancing a numerical solution one step at a time.
-
-The methods are presented in increasing order of accuracy:
-
-| Method | Expected global error |
-| --- | ---: |
-| Euler | $O(h)$ |
-| Midpoint | $O(h^2)$ |
-| Heun | $O(h^2)$ |
-| RK4 | $O(h^4)$ |
-
-The first worked example solves
-
-$$
-y'=\cos(x), \qquad y(0)=0,
-$$
-
-and compares every numerical result with the analytical solution $y=\sin(x)$. A second example applies all four methods to
-
-$$
-y''-3y'=x-2y, \qquad y(0)=0, \quad y'(0)=0.
-$$
-
-Each plot reports the mean absolute difference between the numerical and analytical values.
-
-#### State vectors and coupled systems
-
-The notebook then generalizes the four methods to state-vector equations:
-
-$$
-\frac{d\vec{r}}{dt}=\vec{f}(t,\vec{r}), \qquad \vec{r}(a)=\vec{r}_0.
-$$
-
-Representing all dependent variables in one vector allows the same update rule to solve coupled systems. It also handles higher-order ODEs after introducing derivative states. For example,
-
-$$
-y''=f(t,y,y')
-$$
-
-can be rewritten with $\vec{r}=\langle y,v\rangle$ and $v=y'$ as
-
-$$
-\frac{d\vec{r}}{dt}=\langle v,f(t,y,v)\rangle.
-$$
-
-The first state-vector example solves the coupled system
-
-$$
-x'=\frac{y}{8}, \qquad y'=\frac{x}{2}, \qquad x(0)=1, \quad y(0)=0,
-$$
-
-using `state_euler_method`, `state_midpoint_method`, `state_heun_method`, and `state_rk4`. Every result is compared against
-
-$$
-x(t)=\cosh\left(\frac{t}{4}\right), \qquad y(t)=2\sinh\left(\frac{t}{4}\right).
-$$
-
-The next example combines two second-order oscillators into the four-component state $\langle x,x',y,y'\rangle$:
-
-$$
-x''+x=0, \qquad y''+4y=0.
-$$
-
-It demonstrates that the same state-vector interface can solve multiple higher-order equations simultaneously and contrasts explicit Euler's long-term energy drift with the higher-order methods.
-
-#### Lorenz attractor
-
-The final IVP example applies `state_rk4` to the three-variable Lorenz system
-
-$$
-\dot{x}=10(y-x), \qquad
-\dot{y}=x(28-z)-y, \qquad
-\dot{z}=xy-\frac{8}{3}z.
-$$
-
-Trajectories starting at $\langle0,1,0\rangle$ and $\langle0.1,1,0\rangle$ illustrate sensitivity to initial conditions. Related rendered demonstrations are available as [`lorenz_attractor.mp4`](../animation_scripts/animations/lorenz_attractor.mp4) and [`two_lorenz_trajectories.mp4`](../animation_scripts/animations/two_lorenz_trajectories.mp4). The paired animation makes the initially close paths and their eventual divergence visible in the same three-dimensional view.
-
-### Solving BVPs with finite differences
-
-[`solving_bvp_problems_using_fdm.ipynb`](solving_bvp_problems_using_fdm.ipynb) considers linear boundary value problems in the form
-
-$$
-y''+P(x)y'+Q(x)y=R(x), \qquad y(a)=y_0, \quad y(b)=y_N.
-$$
-
-It derives centered finite-difference approximations for $y'$ and $y''$, substitutes them into the differential equation, and shows why the resulting $N-1$ equations form a tridiagonal system. The implementation solves that system with the Thomas algorithm without allocating a full dense matrix.
-
-The worked example solves
-
-$$
-y''-4y=4x, \qquad y(0)=0, \quad y(1)=2,
-$$
-
-then plots the finite-difference and analytical solutions together and reports their mean absolute difference.
-
-### Population models
-
-[`population_models.ipynb`](population_models.ipynb) develops increasingly realistic first-order models for the population $P(t)$ of a species:
-
-1. Exponential growth assumes unlimited resources:
-
-   $$
-   \frac{dP}{dt}=rP.
-   $$
-
-2. Logistic growth introduces the carrying capacity $K$:
-
-   $$
-   \frac{dP}{dt}=rP\left(1-\frac{P}{K}\right).
-   $$
-
-3. The Allee-effect model adds a threshold population $T$:
-
-   $$
-   \frac{dP}{dt}=-rP\left(1-\frac{P}{K}\right)\left(1-\frac{P}{T}\right).
-   $$
-
-The notebook compares the exponential and logistic models, examines initial populations below, at, and above the carrying capacity, and demonstrates how populations above and below the Allee threshold behave differently.
-
-A rendered animation based on the same model is available as [`population_modelling.gif`](../animation_scripts/animations/population_modelling.gif).
-
-### Error function as an ODE
-
-[`erf_function_using_ode.ipynb`](erf_function_using_ode.ipynb) starts from
-
-$$
-\mathrm{erf}(x)=\int_0^x \frac{2}{\sqrt{\pi}}e^{-t^2}\,dt
-$$
-
-and rewrites it as the IVP
-
-$$
-y'=\frac{2}{\sqrt{\pi}}e^{-x^2}, \qquad y(0)=0.
-$$
-
-RK4 computes the solution for nonnegative $x$. The notebook then uses the odd symmetry $\mathrm{erf}(-x)=-\mathrm{erf}(x)$ to plot the function over $[-32,32]$.
-
-A rendered version of this visualization is available as [`erf.gif`](../animation_scripts/animations/erf.gif).
-
-## Dependencies
-
-| Package | Role in the notebooks |
+| Notebook | Topics |
 | --- | --- |
-| NumPy | Array operations, mathematical functions, and error calculations |
-| Matplotlib | Static plots and visual comparisons |
-| JupyterLab | Interactive notebook environment |
-| IPython | Rich mathematical display used by the population notebook |
+| [`solving_ivp_problems.ipynb`](solving_ivp_problems.ipynb) | Vector fields; scalar and state-vector IVPs; Euler, midpoint, Heun, and RK4; coupled systems; Lorenz trajectories |
+| [`solving_bvp_problems_using_fdm.ipynb`](solving_bvp_problems_using_fdm.ipynb) | Central finite differences, the tridiagonal system, and the Thomas algorithm |
+| [`population_models.ipynb`](population_models.ipynb) | Exponential and logistic growth, carrying capacity, and the Allee effect |
+| [`erf_function_using_ode.ipynb`](erf_function_using_ode.ipynb) | Computing the error function as an initial value problem |
 
-IPython is installed transitively with JupyterLab. Exact dependency constraints are declared in [`pyproject.toml`](../pyproject.toml), and resolved versions are recorded in [`uv.lock`](../uv.lock).
+## Suggested order
 
-## Reproducibility notes
+Start with `solving_ivp_problems.ipynb` for the numerical methods and state-vector formulation. Continue with `solving_bvp_problems_using_fdm.ipynb` for the finite-difference method, then explore the population and error-function examples. The last two notebooks can also be read independently after the basic IVP methods.
 
-- Model constants, initial conditions, time intervals, and step sizes are defined directly in each notebook.
-- The notebooks use the project's own fixed-step solvers rather than SciPy integration routines.
-- Execute cells in order because later cells may reuse variables and results created by earlier cells.
-- Decreasing the step size generally improves numerical accuracy but increases the number of solver iterations.
+## Run the notebooks
 
-These notebooks are educational demonstrations rather than benchmarks or production modelling tools. See the [`solver` documentation](../solver/README.md#current-limitations) for the numerical implementation's current scope.
+Install the project from its root by following the [Python setup guide](../README.md#python-setup), then start JupyterLab:
+
+```bash
+uv run jupyter lab analysis
+```
+
+With an activated pip environment, use:
+
+```bash
+python -m jupyter lab analysis
+```
+
+Open a notebook and run its cells from top to bottom. Later cells may reuse values created earlier. Python 3.12 or newer is required; NumPy, Matplotlib, and JupyterLab are project dependencies.
+
+## Learning notes
+
+The IVP notebook compares numerical solutions with known solutions for selected equations and discusses global error orders. Its state-vector examples show how coupled and higher-order equations can use the same integration methods. The BVP notebook derives the centered-difference equations and compares the computed result with an analytical solution. The application notebooks use RK4 to evaluate population models and the integral defining the error function.
+
+These notebooks are educational examples, not performance benchmarks or production modelling workflows. See the [solver guide](../solver/README.md#grid-and-limitations) for implementation limits.
+
+## Related guides
+
+- [Python solver](../solver/README.md)
+- [Animations](../animation_scripts/README.md)
+- [Benchmarks](../benchmark/README.md)
+
+## Project tree
+
+```text
+analysis/
+├── README.md                           # Notebook guide
+├── erf_function_using_ode.ipynb         # Error function as an IVP
+├── population_models.ipynb              # Exponential, logistic, and Allee models
+├── solving_bvp_problems_using_fdm.ipynb # Finite-difference BVP method
+└── solving_ivp_problems.ipynb           # IVP methods and state-vector systems
+```
 
 ## License
 
