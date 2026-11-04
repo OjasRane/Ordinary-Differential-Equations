@@ -2,6 +2,12 @@
 
 This project is a collection of fixed-step numerical solvers for ordinary differential equations, with mathematical notebooks, animations, and Python and C++ implementations. It is intended for learning and experimentation. For production scientific computing, use a mature package such as `scipy.integrate`.
 
+Play the animation below:
+
+https://github.com/user-attachments/assets/2b5d75e8-8198-4276-89ed-669f307e3bf9
+<p align="center">
+    Halvorsen Attractor made using C++ as computational core and Python's Matplotlib for visualization.
+</p>
 ## What is included
 
 - Scalar and state-vector initial value problem (IVP) solvers using Euler, midpoint, Heun, and classical fourth-order Runge–Kutta (RK4) methods.
