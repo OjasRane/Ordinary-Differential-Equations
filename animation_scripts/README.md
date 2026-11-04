@@ -4,17 +4,59 @@ The scripts in this directory use the project's solvers to calculate trajectorie
 
 ## Gallery
 
-| Example | Python source | Rendered animation |
-| --- | --- | --- |
-| Simple pendulum | [`pysolved/simple_pendulum.py`](pysolved/simple_pendulum.py) | [`simple_pendulum.gif`](animations/simple_pendulum.gif) |
-| Undamped spring–mass system | [`pysolved/spring_mass.py`](pysolved/spring_mass.py) | [`spring_mass.gif`](animations/spring_mass.gif) |
-| Damped spring–mass system | [`pysolved/damped_shm.py`](pysolved/damped_shm.py) | [`damped_shm.mp4`](animations/damped_shm.mp4) |
-| Population model with the Allee effect | [`pysolved/population_modelling.py`](pysolved/population_modelling.py) | [`population_modelling.gif`](animations/population_modelling.gif) |
-| Error function | [`pysolved/erf.py`](pysolved/erf.py) | [`erf.gif`](animations/erf.gif) |
-| Double pendulum | [`pysolved/double_pendulum.py`](pysolved/double_pendulum.py) | [`double_pendulum.mp4`](animations/double_pendulum.mp4) |
-| Lorenz attractor | [`pysolved/lorenz_attractor.py`](pysolved/lorenz_attractor.py) | [`lorenz_attractor.mp4`](animations/lorenz_attractor.mp4) |
-| Nearby Lorenz trajectories | [`pysolved/two_lorenz_trajectories.py`](pysolved/two_lorenz_trajectories.py) | [`two_lorenz_trajectories.mp4`](animations/two_lorenz_trajectories.mp4) |
-| Halvorsen attractor (C++ integration) | [`csolved/halvorsen_attractor/`](csolved/halvorsen_attractor/) | [`halvorsen_attractor.mp4`](animations/halvorsen_attractor.mp4) |
+<table>
+  <tr>
+    <td align="center">
+      <strong>Simple pendulum</strong><br>
+      <img src="animations/simple_pendulum.gif" alt="Simple pendulum animation" width="360">
+    </td>
+    <td align="center">
+      <strong>Spring–mass system</strong><br>
+      <img src="animations/spring_mass.gif" alt="Undamped spring-mass animation" width="360">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>Population model</strong><br>
+      <img src="animations/population_modelling.gif" alt="Allee-effect population animation" width="360">
+    </td>
+    <td align="center">
+      <strong>Error function</strong><br>
+      <img src="animations/erf.gif" alt="Error function animation" width="360">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>Damped spring–mass system</strong><br>
+      <a href="https://github.com/user-attachments/assets/f43c315b-6fb7-4008-82ab-dff599e1c48f">Watch the damped spring–mass animation</a>
+    </td>
+    <td align="center">
+      <strong>Double pendulum</strong><br>
+      <a href="https://github.com/user-attachments/assets/e3828ccc-f8d4-4178-8b3e-86f478523abf">Watch the double-pendulum animation</a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>Lorenz attractor</strong><br>
+      <a href="https://github.com/user-attachments/assets/b3f5ef3b-e850-42d4-a14c-ffcaf710aa20">Watch the Lorenz-attractor animation</a>
+    </td>
+    <td align="center">
+      <strong>Two Lorenz trajectories</strong><br>
+      <a href="https://github.com/user-attachments/assets/9ca35a00-3e58-4b64-adbf-3a05f9c08c49">Watch the two-trajectory Lorenz animation</a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>Halvorsen attractor</strong><br>
+      <a href="https://github.com/user-attachments/assets/2b5d75e8-8198-4276-89ed-669f307e3bf9">Watch the Halvorsen attractor animation</a>
+    </td>
+    <td align="center">
+      <strong>Stay tuned!</strong><br>
+    </td>
+  </tr>
+</table>
+
+The MP4 animations use direct links so they remain accessible on Markdown renderers that do not display embedded video players.
 
 ## Run a Python demo
 
