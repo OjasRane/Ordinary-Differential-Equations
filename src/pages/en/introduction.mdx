@@ -1,31 +1,39 @@
 ---
 layout: '@/layouts/Markdown.astro'
 title: Introduction
-description: Quick introduction to the project.
+description: An introduction to the numerical methods, implementations, and experiments in the project.
 ---
 
-**Ordinary Differential Equations** is a from-scratch collection of fixed-step numerical methods for solving ODEs, accompanied by mathematical walkthroughs, experiments, and animated applications.
+**Ordinary Differential Equations** is a from-scratch collection of fixed-step numerical methods for solving ordinary differential equations (ODEs), implemented in both **Python and C++**. The project brings together mathematical walkthroughs, numerical experiments, and animated applications of these methods.
 
-The project was built primarily to explore the mathematics behind numerical ODE solving rather than treating numerical solvers as black boxes. The methods are implemented directly using NumPy and explored both geometrically and numerically, before being applied to problems ranging from population models and the error function to oscillatory systems, double pendulums, and the Lorenz system.
+The project was built primarily to explore the mathematics behind numerical ODE solving rather than treating numerical solvers as black boxes. The methods are derived, implemented, and investigated through both geometric and numerical perspectives before being applied to problems ranging from population models and the error function to oscillatory systems, double pendulums, and chaotic dynamical systems.
+
+The Python implementation uses NumPy for numerical computation, while the C++ implementation provides a separate implementation of the solvers using a custom numerical library, [Jacobi](https://github.com/OjasRane/Jacobi), for vector and matrix operations.
 
 ## Numerical Methods
 
-The project currently implements methods for both **initial value problems (IVPs)** and **boundary value problems (BVPs)**.
+The project implements methods for both **initial value problems (IVPs)** and **boundary value problems (BVPs)**.
 
-For IVPs:
+### Initial Value Problems
+
+The following fixed-step methods are implemented:
 
 - Euler's method
 - Explicit midpoint method
 - Heun's / improved Euler method
 - Classical fourth-order Runge–Kutta method (RK4)
 
-The IVP solvers support first-order equations, second-order equations, and systems of ODEs using a state-vector formulation.
+The Python implementation supports first-order equations, higher-order equations, and systems of ODEs using a state-vector formulation. The C++ implementation uses the state-vector formulation to solve systems of ODEs.
+
+### Boundary Value Problems
 
 For linear second-order BVPs, the project uses **central finite differences** to transform the differential equation into a tridiagonal linear system, which is then solved using the **Thomas algorithm**.
 
+Both Python and C++ implementations include finite-difference BVP solvers.
+
 ## Notebooks
 
-The notebooks develop the numerical methods mathematically and then investigate them through numerical experiments.
+The notebooks develop the numerical methods mathematically and investigate their properties through numerical experiments.
 
 They currently cover:
 
@@ -45,17 +53,32 @@ The numerical solutions are also used to animate several dynamical systems and m
 - Simple and double pendulum motion
 - Undamped and damped spring–mass systems
 - The Lorenz system, including its chaotic attractor and the divergence of nearby trajectories
+- The Halvorsen attractor
 - Population growth with the Allee effect
 - The error function
 
-These animations are generated from numerical solutions computed using the methods implemented in the project.
+These visualizations demonstrate how numerical solutions can be used to investigate the behaviour of dynamical systems.
+
+One of the C++ examples computes the Halvorsen attractor using the C++ ODE solver and writes the resulting trajectory to a binary `.jcbi` file. The data is subsequently loaded in Python and visualized using Matplotlib. This separates numerical computation from visualization while allowing both languages to work together.
 
 [View the animations →](../animations/)
 
+## Performance Experiments
+
+Having implementations in both Python and C++ also provides an opportunity to investigate their computational performance.
+
+The project includes benchmarks comparing the two implementations on dynamical systems such as the **Lorenz** and **Halvorsen** systems. The benchmarks measure numerical computation separately from visualization, using repeated runs to compare execution times across the different IVP methods.
+
+These experiments provide a practical way to examine the performance differences between the two implementations while keeping the underlying numerical methods consistent.
+
+The benchmark programs and recorded results are available in the [GitHub repository](https://github.com/OjasRane/Ordinary-Differential-Equations).
+
 ## Scope
 
-This is an **educational implementation**, not a replacement for production numerical libraries.
+This is an **educational and experimental implementation**, not a replacement for production numerical libraries.
 
 The solvers deliberately remain relatively simple: they use fixed step sizes and do not include adaptive error control, stiffness handling, event detection, or the extensive numerical safeguards provided by mature scientific-computing libraries.
 
 For production work, tools such as `scipy.integrate.solve_ivp` and `scipy.integrate.solve_bvp` are more appropriate.
+
+The primary goal of this project is to understand the numerical methods, explore their mathematical foundations, and investigate their behaviour through implementation and experimentation.
